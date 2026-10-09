@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversor de Unidades</title>
+  </head>
+  <body>
+    <header>
+      <p>oi</p>
+    </header>
+    <h1>Conversor de Unidades Básico</h1>
+    <span>Escolha abaixo as unidades de medida e insira o valor a ser convertido:</span><br />
+    <div class="container">
+    <div class="convertmoeda">
+
+      <label for="moeda-origem">Converter de:</label>
+
+      <select id="moeda-origem">
+
+        <option value="BRL">Real brasileiro (BRL)</option>
+        <option value="USD">Dólar americano (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="GBP">Libra esterlina (GBP)</option>
+        <option value="ARS">Peso argentino (ARS)</option>
+        <option value="JPY">Iene japonês (JPY)</option>
+
+      </select>
+
+      <input type="text" id="moedaBase" /><br />
+
+      <label for="moeda-destino">Converter para:</label>
+
+      <select id="moeda-destino">
+
+        <option value="BRL">Real brasileiro (BRL)</option>
+        <option value="USD">Dólar americano (USD)</option>
+        <option value="EUR">Euro (EUR)</option>
+        <option value="GBP">Libra esterlina (GBP)</option>
+        <option value="ARS">Peso argentino (ARS)</option>
+        <option value="JPY">Iene japonês (JPY)</option>
+      </select>
+
+      <input type="text" id="moedaConvertido" /><br />
+
+    </div>
+
+    <div class="convertcomprimento">
+
+      <label for="comprimento-origem">Converter de:</label>
+
+      <select id="comprimento-origem">
+
+        <option value="mm">Milímetros</option>
+        <option value="cm">Centímetros</option>
+        <option value="m">Metros</option>
+        <option value="km">Quilômetros</option>
+
+      </select>
+
+      <input type="text" id="comprimentoBase" /> <br />
+
+      <label for="comprimento-destino">Converter para:</label>
+
+      <select id="comprimento-destino">
+
+        <option value="mm">Milímetros</option>
+        <option value="cm">Centímetros</option>
+        <option value="m">Metros</option>
+        <option value="km">Quilômetros</option>
+
+        <input type="text" id="comprimentoConvertido" /><br />
+
+      </select>
+
+    </div>
+
+    <div class="convertvolume">
+
+      <label for="volume-origem">Converter de:</label>
+
+      <select id="volume-origem">
+
+        <option value="ml">Mililitro (mL)</option>
+        <option value="l">Litro (L)</option>
+        <option value="cm3">Centímetro cúbico (cm³)</option>
+        <option value="m3">Metro cúbico (m³)</option>
+
+      </select>
+
+      <input type="text" id="volumeBase" /><br />
+
+      <label for="volume-destino">Converter para:</label>
+
+      <select id="volume-destino">
+
+        <option value="ml">Mililitro (mL)</option>
+        <option value="l">Litro (L)</option>
+        <option value="cm3">Centímetro cúbico (cm³)</option>
+        <option value="m3">Metro cúbico (m³)</option>
+
+      </select>
+
+      <input type="text" id="volumeConvertido" /> <br />
+
+    </div>
+    <div class="convertmassa">
+
+      <label for="massa-origem">Converter de:</label>
+
+      <select id="massa-origem">
+
+        <option value="mg">Miligrama (mg)</option>
+        <option value="g">Grama (g)</option>
+        <option value="kg">Quilograma (kg)</option>
+        <option value="t">Tonelada (t)</option>
+        <option value="lb">Libra (lb)</option>
+        <option value="oz">Onça (oz)</option>
+
+      </select>
+
+      <input type="text" id="massaBase" /><br />
+
+      <label for="massa-destino">Converter para:</label>
+
+      <select id="massa-destino">
+
+        <option value="mg">Miligrama (mg)</option>
+        <option value="g">Grama (g)</option>
+        <option value="kg">Quilograma (kg)</option>
+        <option value="t">Tonelada (t)</option>
+        <option value="lb">Libra (lb)</option>
+        <option value="oz">Onça (oz)</option>
+
+      </select>
+
+      <input type="text" id="massaConvertido" /><br />
+    </div>
+    <div class="convertarea">
+
+      <label for="area-origem">Converter de:</label>
+
+      <select id="area-origem">
+
+        <option value="mm2">Milímetro quadrado (mm²)</option>
+        <option value="cm2">Centímetro quadrado (cm²)</option>
+        <option value="m2">Metro quadrado (m²)</option>
+        <option value="km2">Quilômetro quadrado (km²)</option>
+        <option value="ha">Hectare (ha)</option>
+        <option value="acre">Acre</option>
+
+      </select>
+
+      <input type="text" id="baseArea" /><br />
+
+      <label for="area-destino">Converter para:</label>
+
+      <select id="area-destino">
+
+      <option value="mm2">Milímetro quadrado (mm²)</option>
+        <option value="cm2">Centímetro quadrado (cm²)</option>
+        <option value="m2">Metro quadrado (m²)</option>
+        <option value="km2">Quilômetro quadrado (km²)</option>
+        <option value="ha">Hectare (ha)</option>
+        <option value="acre">Acre</option>
+
+        </select>
+
+      <input type="text" id="areaConvertido" /><br />
+
+    </div>
+
+    <div class="convertvelocidade">
+
+      <label for="velocidade-origem">Converter de:</label>
+
+      <select id="velocidade-origem">
+
+        <option value="m_s">Metro por segundo (m/s)</option>
+        <option value="km_h">Quilômetro por hora (km/h)</option>
+        <option value="mph">Milha por hora (mph)</option>
+        <option value="kn">Nó (kn)</option>
+
+      </select>
+
+      <input type="text" id="velocidadeBase" /><br />
+
+      <label for="velocidade-destino">Converter para:</label>
+
+      <select id="velocidade-destino">
+
+        <option value="m_s">Metro por segundo (m/s)</option>
+        <option value="km_h">Quilômetro por hora (km/h)</option>
+        <option value="mph">Milha por hora (mph)</option>
+        <option value="kn">Nó (kn)</option>
+
+      </select>
+
+
+      <input type="text" id="velocidadeConvertido" /><br />
+    </div>
+    </div>
+  </body>
+</html>
