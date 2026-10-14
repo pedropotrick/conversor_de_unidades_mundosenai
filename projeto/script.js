@@ -13,7 +13,7 @@ function converterComprimento(){
 
     const resultado = valor * fatoresComprimento[origem] / fatoresComprimento[destino];
 
-    document.getElementById("comprimentoConvertido").value = resultado;
+    document.getElementById("comprimentoConvertido").value = resultado.toFixed(3);
 }
 
 function converterMassa(){
@@ -33,7 +33,7 @@ function converterMassa(){
 
     const resultado = valor * fatoresMassa[origem] / fatoresMassa[destino];
 
-    document.getElementById("massaConvertido").value = resultado;
+    document.getElementById("massaConvertido").value = resultado.toFixed(3);
 
 }
 
@@ -52,7 +52,7 @@ function converterVelocidade(){
 
     const resultado = valor * fatoresVelocidade[origem] / fatoresVelocidade[destino];
 
-    document.getElementById("velocidadeConvertido").value = resultado;
+    document.getElementById("velocidadeConvertido").value = resultado.toFixed(3);
 }
 
 function converterVolume(){
@@ -70,7 +70,7 @@ function converterVolume(){
 
     const resultado = valor * fatoresVolume[origem] / fatoresVolume[destino];
 
-    document.getElementById("volumeConvertido").value = resultado;
+    document.getElementById("volumeConvertido").value = resultado.toFixed(3);
 }
 
 function converterArea(){
@@ -90,6 +90,6 @@ function converterArea(){
 
     const resultado = valor * fatoresArea[origem] / fatoresArea[destino];
 
-    document.getElementById("areaConvertido").value = resultado;
+    document.getElementById("areaConvertido").value = resultado.toFixed(3);
 
 }
