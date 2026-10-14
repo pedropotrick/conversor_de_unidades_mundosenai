@@ -42,7 +42,9 @@
         <option value="JPY">Iene japonês (JPY)</option>
       </select>
 
-      <input type="text" id="moedaConvertido" /><br />
+      <input type="text" id="moedaConvertido" readonly/><br />
+
+      <button type="button" onclick="">Converter</button>
 
     </div>
 
@@ -70,9 +72,12 @@
         <option value="m">Metros</option>
         <option value="km">Quilômetros</option>
 
-        <input type="text" id="comprimentoConvertido" /><br />
-
+        
       </select>
+      
+      <input type="text" id="comprimentoConvertido" readonly/><br />
+
+      <button type="button" onclick="converterComprimento()">Converter</button>
 
     </div>
 
@@ -102,7 +107,10 @@
 
       </select>
 
-      <input type="text" id="volumeConvertido" /> <br />
+      <input type="text" id="volumeConvertido" readonly/> <br />
+
+      <button type="button" onclick="converterVolume()">Converter</button>
+
 
     </div>
     <div class="convertmassa">
@@ -135,7 +143,10 @@
 
       </select>
 
-      <input type="text" id="massaConvertido" /><br />
+      <input type="text" id="massaConvertido" readonly /><br />
+
+      <button type="button" onclick="converterMassa()">Converter</button>
+
     </div>
     <div class="convertarea">
 
@@ -167,7 +178,9 @@
 
         </select>
 
-      <input type="text" id="areaConvertido" /><br />
+      <input type="text" id="areaConvertido" readonly /><br />
+
+      <button type="button" onclick="converterArea()">Converter</button>
 
     </div>
 
@@ -198,8 +211,12 @@
       </select>
 
 
-      <input type="text" id="velocidadeConvertido" /><br />
+      <input type="text" id="velocidadeConvertido" readonly /><br />
+
+      <button type="button" onclick="converterVelocidade()">Converter</button>
+
     </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
