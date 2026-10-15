@@ -13,7 +13,6 @@
   --raio: 0px;
 }
 
-
 /* =====================================
    RESET
 ===================================== */
@@ -23,7 +22,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 
 /* =====================================
    CORPO DA PÁGINA
@@ -35,7 +33,6 @@ body {
   color: var(--cor-texto);
   min-height: 100vh;
 }
-
 
 /* =====================================
    CABEÇALHO
@@ -61,7 +58,6 @@ header p {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-
 
 /* =====================================
    TÍTULO PRINCIPAL
@@ -90,7 +86,6 @@ body > span {
   padding: 0 15px;
 }
 
-
 /* =====================================
    CONTAINER DOS CONVERSORES
 ===================================== */
@@ -103,14 +98,10 @@ body > span {
 
   display: grid;
 
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(280px, 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
   gap: 22px;
 }
-
 
 /* =====================================
    CARDS
@@ -136,7 +127,6 @@ body > span {
   transition: transform 0.2s ease;
 }
 
-
 /* Efeito discreto ao passar o mouse */
 
 .convertmoeda:hover,
@@ -147,7 +137,6 @@ body > span {
 .convertvelocidade:hover {
   transform: translateY(-3px);
 }
-
 
 /* =====================================
    TÍTULOS DOS CARDS
@@ -169,7 +158,6 @@ body > span {
   border-bottom: 4px solid var(--cor-destaque);
 }
 
-
 /* =====================================
    LABELS
 ===================================== */
@@ -185,7 +173,6 @@ label {
   font-size: 14px;
   font-weight: 900;
 }
-
 
 /* =====================================
    INPUTS E SELECTS
@@ -210,13 +197,11 @@ input {
   outline: none;
 }
 
-
 /* Espaço para os campos de valor */
 
 input {
   margin-top: 10px;
 }
-
 
 /* Destaque ao selecionar um campo */
 
@@ -226,7 +211,6 @@ input:focus {
 
   box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.2);
 }
-
 
 /* =====================================
    RESULTADOS DA CONVERSÃO
@@ -241,7 +225,6 @@ input[readonly] {
 
   border: 2px solid #c5a000;
 }
-
 
 /* =====================================
    BOTÕES CONVERTER
@@ -269,11 +252,11 @@ button {
 
   box-shadow: 3px 3px 0 var(--cor-secundaria);
 
-  transition: background 0.15s ease,
-              transform 0.15s ease,
-              box-shadow 0.15s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
-
 
 /* Efeito ao passar o mouse */
 
@@ -282,7 +265,6 @@ button:hover {
   color: white;
 }
 
-
 /* Efeito ao clicar */
 
 button:active {
@@ -290,14 +272,12 @@ button:active {
   box-shadow: 1px 1px 0 var(--cor-secundaria);
 }
 
-
 /* Acessibilidade pelo teclado */
 
 button:focus-visible {
   outline: 3px solid var(--cor-secundaria);
   outline-offset: 4px;
 }
-
 
 /* =====================================
    RESPONSIVIDADE
@@ -341,4 +321,102 @@ button:focus-visible {
     margin: -18px -18px 18px;
     font-size: 19px;
   }
+}
+
+/* =====================================
+   MODAL DE ERRO
+===================================== */
+
+#modal-erro {
+  width: 90%;
+  max-width: 460px;
+  max-height: 90vh;
+  margin: auto;
+  padding: 0;
+
+  background: var(--cor-card);
+  color: var(--cor-texto);
+
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+
+  overflow-y: auto;
+}
+
+/* Fundo escurecido atrás do modal */
+
+#modal-erro::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Cabeçalho */
+
+#modal-erro .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 16px 20px;
+
+  background: var(--cor-principal);
+  border-bottom: 4px solid var(--cor-destaque);
+}
+
+#modal-erro .modal-titulo {
+  margin: 0;
+
+  color: var(--cor-destaque);
+  text-align: left;
+  font-size: 21px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Botão X */
+
+#modal-erro .btn-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+
+  background: var(--cor-destaque);
+  color: var(--cor-principal);
+
+  border: 2px solid var(--cor-destaque);
+  box-shadow: none;
+
+  font-size: 24px;
+  line-height: 1;
+}
+
+#modal-erro .btn-close:hover {
+  background: var(--cor-card);
+}
+
+/* Mensagem */
+
+#modal-erro .dialog-body {
+  padding: 25px 20px;
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Rodapé */
+
+#modal-erro .dialog-footer {
+  padding: 0 20px 22px;
+}
+
+#modal-erro .btn-fechar {
+  margin-top: 0;
 }
