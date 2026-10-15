@@ -13,6 +13,7 @@
     <h1>Conversor de Unidades Básico</h1>
     <span>Escolha abaixo as unidades de medida e insira o valor a ser convertido:</span><br />
     <div class="container">
+
     <div class="convertmoeda">
 
       <h2>Moeda</h2>
@@ -47,6 +48,28 @@
       <input type="text" id="moedaConvertido" readonly/><br />
 
       <button type="button" onclick="">Converter</button>
+
+      <dialog class="modal" id="modal-erro">
+
+        <div class="modal-header">
+
+          <h1 class="modal-titulo">Erro na Conversão</h1>
+          <button type="button" class="btn-close" onclick="modalErro.close()" aria-label="Fechar">×</button>
+
+        </div>
+
+        <div class="dialog-body">
+
+          <p>O usuário não inseriu nenhum valor a ser convertido.</p>
+
+        </div>
+
+        <div class="dialog-footer">
+         <button type="button" class="btn-fechar"
+        onclick="modalErro.close()">Fechar</button>
+        </div>
+
+      </dialog>
 
     </div>
 
