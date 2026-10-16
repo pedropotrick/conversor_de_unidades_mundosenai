@@ -24,7 +24,7 @@ function converterComprimento() {
         return;
     }
 
-    valor = Number(entrada);
+
 }
 
 function converterMassa() {
@@ -54,7 +54,7 @@ function converterMassa() {
         return;
     }
 
-    valor = Number(entrada);
+
 }
 
 
@@ -84,7 +84,7 @@ function converterVelocidade() {
         return;
     }
 
-    valor = Number(entrada);
+
 
 }
 
@@ -113,7 +113,7 @@ function converterVolume() {
         return;
     }
 
-    valor = Number(entrada);
+
 
 }
 
@@ -144,9 +144,81 @@ function converterArea() {
         return;
     }
 
-    valor = Number(entrada);
+
 
 }
 
 const modalErro = document.getElementById("modal-erro");
 
+
+// Busca apenas as moedas necessárias, usando o real como unidade base.
+async function converterMoeda() {
+  const entrada = document.getElementById("moedaBase").value.trim();
+  const campoResultado = document.getElementById("moedaConvertido");
+  const aviso = document.getElementById("moeda-status");
+  const botao = document.getElementById("converter-moeda");
+  campoResultado.value = "";
+  aviso.textContent = "";
+
+  if (entrada === "") {
+    modalErro.showModal();
+    return;
+  }
+
+  const valor = Number(entrada.replace(",", "."));
+  if (!Number.isFinite(valor) || valor < 0) {
+    aviso.textContent = "Insira um número válido, maior ou igual a zero.";
+    return;
+  }
+
+  const origem = document.getElementById("moeda-origem").value;
+  const destino = document.getElementById("moeda-destino").value;
+  if (origem === destino) {
+    campoResultado.value = valor.toFixed(2);
+    return;
+  }
+
+  botao.disabled = true;
+  botao.textContent = "Consultando...";
+  aviso.textContent = "Buscando cotações...";
+
+  try {
+    const moedas = [...new Set([origem, destino])].filter(moeda => moeda !== "BRL");
+    const pares = moedas.map(moeda => moeda + "-BRL").join(",");
+    const resposta = await fetch(
+      "https://economia.awesomeapi.com.br/json/last/" + pares,
+      { signal: AbortSignal.timeout(15000) }
+    );
+    if (!resposta.ok) throw new Error("Falha ao consultar cotações");
+    const dados = await resposta.json();
+    const fatores = { BRL: 1 };
+    const datas = [];
+
+    for (const moeda of moedas) {
+      const cotacao = dados[moeda + "BRL"];
+      const taxa = Number(cotacao?.bid);
+      if (!Number.isFinite(taxa) || taxa <= 0) {
+        throw new Error("Cotação indisponível");
+      }
+      fatores[moeda] = taxa;
+      const data = Number(cotacao.timestamp);
+      if (Number.isFinite(data) && data > 0) datas.push(data);
+    }
+
+    // Converte primeiro para reais e depois para a moeda de destino.
+    const resultado = valor * fatores[origem] / fatores[destino];
+    if (!Number.isFinite(resultado)) throw new Error("Resultado inválido");
+    campoResultado.value = resultado.toFixed(2);
+    aviso.textContent = "Referência: cotação de compra (bid), via BRL. Sem taxas ou impostos.";
+    if (datas.length) {
+      aviso.textContent += " Cotação mais antiga utilizada: " +
+        new Date(Math.min(...datas) * 1000).toLocaleString("pt-BR") + ".";
+    }
+  } catch (erro) {
+    campoResultado.value = "";
+    aviso.textContent = "Não foi possível consultar a cotação. Confira sua conexão e tente novamente.";
+  } finally {
+    botao.disabled = false;
+    botao.textContent = "Converter";
+  }
+}

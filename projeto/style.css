@@ -420,3 +420,6 @@ button:focus-visible {
 #modal-erro .btn-fechar {
   margin-top: 0;
 }
+
+#moeda-status { margin-top: 14px; font-size: 13px; line-height: 1.5; }
+#converter-moeda:disabled { opacity: 0.65; cursor: wait; }
