@@ -423,3 +423,11 @@ button:focus-visible {
 
 #moeda-status { margin-top: 14px; font-size: 13px; line-height: 1.5; }
 #converter-moeda:disabled { opacity: 0.65; cursor: wait; }
+
+/* Sigla integrada ao campo, separada do valor usado nas contas. */
+.campo-com-unidade { position: relative; margin-top: 10px; }
+.campo-com-unidade input { margin-top: 0; padding-right: 65px; }
+.sigla-unidade {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  font-weight: bold; color: var(--cor-secundaria); pointer-events: none;
+}

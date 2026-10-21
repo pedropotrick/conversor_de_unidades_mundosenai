@@ -9,20 +9,19 @@ function converterComprimento() {
   const origem = document.getElementById("comprimento-origem").value;
   const destino = document.getElementById("comprimento-destino").value;
 
-  const valor = Number(document.getElementById("comprimentoBase").value);
+  const valor = lerNumero(document.getElementById("comprimentoBase"));
+  if (!Number.isFinite(valor)) {
+    document.getElementById("comprimentoConvertido").value = "";
+    modalErro.showModal();
+    return;
+  }
 
   const resultado =
     (valor * fatoresComprimento[origem]) / fatoresComprimento[destino];
 
-  document.getElementById("comprimentoConvertido").value = resultado.toFixed(6);
+  document.getElementById("comprimentoConvertido").value = formatarNumero(resultado);
 
-  const entrada = document.getElementById("comprimentoBase").value;
 
-    if (entrada.trim() === "") {
-        document.getElementById("comprimentoConvertido").value = "";
-        modalErro.showModal();
-        return;
-    }
 
 
 }
@@ -40,19 +39,18 @@ function converterMassa() {
   const origem = document.getElementById("massa-origem").value;
   const destino = document.getElementById("massa-destino").value;
 
-  const valor = Number(document.getElementById("massaBase").value);
+  const valor = lerNumero(document.getElementById("massaBase"));
+  if (!Number.isFinite(valor)) {
+    document.getElementById("massaConvertido").value = "";
+    modalErro.showModal();
+    return;
+  }
 
   const resultado = (valor * fatoresMassa[origem]) / fatoresMassa[destino];
 
-  document.getElementById("massaConvertido").value = resultado.toFixed(3);
+  document.getElementById("massaConvertido").value = formatarNumero(resultado);
 
-   const entrada = document.getElementById("massaBase").value;
-
-    if (entrada.trim() === "") {
-        document.getElementById("massaConvertido").value = "";
-        modalErro.showModal();
-        return;
-    }
+ 
 
 
 }
@@ -69,20 +67,19 @@ function converterVelocidade() {
   const origem = document.getElementById("velocidade-origem").value;
   const destino = document.getElementById("velocidade-destino").value;
 
-  const valor = Number(document.getElementById("velocidadeBase").value);
+  const valor = lerNumero(document.getElementById("velocidadeBase"));
+  if (!Number.isFinite(valor)) {
+    document.getElementById("velocidadeConvertido").value = "";
+    modalErro.showModal();
+    return;
+  }
 
   const resultado =
     (valor * fatoresVelocidade[origem]) / fatoresVelocidade[destino];
 
-  document.getElementById("velocidadeConvertido").value = resultado.toFixed(3);
+  document.getElementById("velocidadeConvertido").value = formatarNumero(resultado);
 
-  const entrada = document.getElementById("velocidadeBase").value;
 
-    if (entrada.trim() === "") {
-        document.getElementById("velocidadeConvertido").value = "";
-        modalErro.showModal();
-        return;
-    }
 
 
 
@@ -99,19 +96,18 @@ function converterVolume() {
   const origem = document.getElementById("volume-origem").value;
   const destino = document.getElementById("volume-destino").value;
 
-  const valor = Number(document.getElementById("volumeBase").value);
+  const valor = lerNumero(document.getElementById("volumeBase"));
+  if (!Number.isFinite(valor)) {
+    document.getElementById("volumeConvertido").value = "";
+    modalErro.showModal();
+    return;
+  }
 
   const resultado = (valor * fatoresVolume[origem]) / fatoresVolume[destino];
 
-  document.getElementById("volumeConvertido").value = resultado.toFixed(3);
+  document.getElementById("volumeConvertido").value = formatarNumero(resultado);
 
-  const entrada = document.getElementById("volumeBase").value;
 
-    if (entrada.trim() === "") {
-        document.getElementById("volumeConvertido").value = "";
-        modalErro.showModal();
-        return;
-    }
 
 
 
@@ -130,19 +126,18 @@ function converterArea() {
   const origem = document.getElementById("area-origem").value;
   const destino = document.getElementById("area-destino").value;
 
-  const valor = Number(document.getElementById("baseArea").value);
+  const valor = lerNumero(document.getElementById("baseArea"));
+  if (!Number.isFinite(valor)) {
+    document.getElementById("areaConvertido").value = "";
+    modalErro.showModal();
+    return;
+  }
 
   const resultado = (valor * fatoresArea[origem]) / fatoresArea[destino];
 
-  document.getElementById("areaConvertido").value = resultado.toFixed(3);
+  document.getElementById("areaConvertido").value = formatarNumero(resultado);
 
-  const entrada = document.getElementById("baseArea").value;
 
-    if (entrada.trim() === "") {
-        document.getElementById("areaConvertido").value = "";
-        modalErro.showModal();
-        return;
-    }
 
 
 
@@ -165,7 +160,7 @@ async function converterMoeda() {
     return;
   }
 
-  const valor = Number(entrada.replace(",", "."));
+  const valor = lerNumero(document.getElementById("moedaBase"));
   if (!Number.isFinite(valor) || valor < 0) {
     aviso.textContent = "Insira um número válido, maior ou igual a zero.";
     return;
@@ -174,7 +169,7 @@ async function converterMoeda() {
   const origem = document.getElementById("moeda-origem").value;
   const destino = document.getElementById("moeda-destino").value;
   if (origem === destino) {
-    campoResultado.value = valor.toFixed(2);
+    campoResultado.value = formatarNumero(valor, true);
     return;
   }
 
@@ -208,7 +203,7 @@ async function converterMoeda() {
     // Converte primeiro para reais e depois para a moeda de destino.
     const resultado = valor * fatores[origem] / fatores[destino];
     if (!Number.isFinite(resultado)) throw new Error("Resultado inválido");
-    campoResultado.value = resultado.toFixed(2);
+    campoResultado.value = formatarNumero(resultado, true);
     aviso.textContent = "Referência: cotação de compra (bid), via BRL. Sem taxas ou impostos.";
     if (datas.length) {
       aviso.textContent += " Cotação mais antiga utilizada: " +
@@ -220,5 +215,79 @@ async function converterMoeda() {
   } finally {
     botao.disabled = false;
     botao.textContent = "Converter";
+  }
+}
+
+// O número fica no input; a sigla fica ao lado, sem entrar na conta.
+function lerNumero(campo) {
+  if (campo.dataset.numero !== undefined) return Number(campo.dataset.numero);
+  const texto = campo.value.trim();
+  if (texto === "") return NaN;
+  const normalizado = texto.includes(",")
+    ? texto.replace(/\./g, "").replace(",", ".") : texto;
+  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalizado)) return NaN;
+  return Number(normalizado);
+}
+
+function formatarNumero(valor, moeda = false) {
+  return valor.toLocaleString("pt-BR", {
+    minimumFractionDigits: moeda ? 2 : 0,
+    maximumFractionDigits: moeda ? 2 : 12
+  });
+}
+
+const siglas = {
+  mm2: "mm²", cm2: "cm²", m2: "m²", km2: "km²",
+  cm3: "cm³", m3: "m³", ml: "mL", l: "L",
+  m_s: "m/s", km_h: "km/h"
+};
+
+for (const [categoria, entradaId, resultadoId] of [
+  ["comprimento", "comprimentoBase", "comprimentoConvertido"],
+  ["massa", "massaBase", "massaConvertido"],
+  ["volume", "volumeBase", "volumeConvertido"],
+  ["area", "baseArea", "areaConvertido"],
+  ["velocidade", "velocidadeBase", "velocidadeConvertido"],
+  ["moeda", "moedaBase", "moedaConvertido"]
+]) {
+  for (const [id, lado] of [[entradaId, "origem"], [resultadoId, "destino"]]) {
+    const campo = document.getElementById(id);
+    const seletor = document.getElementById(categoria + "-" + lado);
+    const grupo = document.createElement("div");
+    grupo.className = "campo-com-unidade";
+    campo.before(grupo);
+    grupo.append(campo);
+    const unidade = document.createElement("span");
+    unidade.className = "sigla-unidade";
+    unidade.setAttribute("aria-hidden", "true");
+    grupo.append(unidade);
+    const atualizarSigla = () => {
+      unidade.textContent = siglas[seletor.value] || seletor.value;
+    };
+    atualizarSigla();
+    seletor.addEventListener("change", () => {
+      atualizarSigla();
+      // Apaga o resultado anterior para não atribuir a ele uma unidade diferente.
+      document.getElementById(resultadoId).value = "";
+    });
+    if (!campo.readOnly) {
+      campo.inputMode = "decimal";
+      campo.addEventListener("input", () => {
+        delete campo.dataset.numero;
+        document.getElementById(resultadoId).value = "";
+      });
+      campo.addEventListener("focus", () => {
+        if (campo.dataset.numero !== undefined) {
+          campo.value = campo.dataset.numero.replace(".", ",");
+        }
+      });
+      campo.addEventListener("blur", () => {
+        const valor = lerNumero(campo);
+        if (Number.isFinite(valor)) {
+          campo.dataset.numero = String(valor);
+          campo.value = formatarNumero(valor, categoria === "moeda");
+        }
+      });
+    }
   }
 }
