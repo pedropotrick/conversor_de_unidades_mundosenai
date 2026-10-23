@@ -431,3 +431,43 @@ button:focus-visible {
   position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
   font-weight: bold; color: var(--cor-secundaria); pointer-events: none;
 }
+
+/* Cabeçalho com as identidades da equipe e do aplicativo. */
+header.cabecalho-logos {
+  padding: 10px 5%;
+  background: var(--cor-card);
+  border-top: 6px solid var(--cor-principal);
+}
+.cabecalho-conteudo {
+  width: 100%; max-width: 1200px; margin: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.logo-equipe { display: block; width: 210px; height: 140px; object-fit: contain; }
+.marca-conversor { display: flex; align-items: center; gap: 12px; }
+.logo-conversor { width: 80px; height: 80px; object-fit: contain; }
+.marca-conversor span {
+  max-width: 220px; font-size: 22px; line-height: 1.2;
+  font-weight: 900; text-transform: uppercase; color: var(--cor-principal);
+}
+@media (max-width: 600px) {
+  .cabecalho-conteudo { gap: 10px; }
+  .logo-equipe { width: 135px; height: 90px; }
+  .marca-conversor { gap: 5px; }
+  .logo-conversor { width: 48px; height: 48px; }
+  .marca-conversor span { font-size: 13px; max-width: 110px; }
+}
+@media (max-width: 360px) {
+  .cabecalho-conteudo { flex-direction: column; gap: 0; }
+  .marca-conversor span { max-width: none; }
+}
+
+/* Rodapé */
+.rodape {
+  padding: 20px 15px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: white;
+  background: var(--cor-principal);
+  border-top: 4px solid var(--cor-destaque);
+}
