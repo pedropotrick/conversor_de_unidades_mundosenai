@@ -291,3 +291,31 @@ for (const [categoria, entradaId, resultadoId] of [
     }
   }
 }
+
+const themeToggle = document.getElementById('theme-toggle');
+
+function aplicarTema() {
+  const temaEscuroAtivo = localStorage.getItem('theme') === 'dark';
+  document.body.classList.toggle('dark-theme', temaEscuroAtivo);
+
+  if (themeToggle) {
+    themeToggle.textContent = temaEscuroAtivo ? '☀️ Claro' : '🌙 Escuro';
+    themeToggle.setAttribute('aria-label', temaEscuroAtivo ? 'Ativar modo claro' : 'Ativar modo escuro');
+  }
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const temaEscuroAtivo = document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', temaEscuroAtivo ? 'dark' : 'light');
+    themeToggle.textContent = temaEscuroAtivo ? '☀️ Claro' : '🌙 Escuro';
+    themeToggle.setAttribute('aria-label', temaEscuroAtivo ? 'Ativar modo claro' : 'Ativar modo escuro');
+  });
+
+  const temaSalvo = localStorage.getItem('theme');
+  if (temaSalvo === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+
+  aplicarTema();
+}
